@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin", "Plugin\Plugin.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConnection", "TestConnection\TestConnection.csproj", "{AD060BD8-4553-4885-98B1-A8DEB8186295}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teams", "Common\Teams.csproj", "{6CBE0AC6-FFCC-43A9-9CE3-91A6DE5C0E16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AD060BD8-4553-4885-98B1-A8DEB8186295}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD060BD8-4553-4885-98B1-A8DEB8186295}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD060BD8-4553-4885-98B1-A8DEB8186295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CBE0AC6-FFCC-43A9-9CE3-91A6DE5C0E16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CBE0AC6-FFCC-43A9-9CE3-91A6DE5C0E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CBE0AC6-FFCC-43A9-9CE3-91A6DE5C0E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CBE0AC6-FFCC-43A9-9CE3-91A6DE5C0E16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
