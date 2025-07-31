@@ -1,38 +1,33 @@
 {
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
   "Actions": [
     {
-      "Icon": "Images/icon",
-      "Name": "TODO_ENTER_NAME_OF_ACTION",
-      "States": [
-        {
-          "Image": "Images/pluginAction",
-          "TitleAlignment": "middle",
-          "FontSize": "12"
-        }
-      ],
-      "SupportedInMultiActions": false,
-      "Tooltip": "TODO_ENTER_TOOLTIP",
-      "UUID": "Plugin.pluginaction",
-      "PropertyInspectorPath": "PropertyInspector/PluginActionPI.html"
+      "UUID": "tv.tech-ben.advanced-teams.end-call",
+      "Name": "End Call",
+      "Tooltip": "End the current call",
+      "DisableAutomaticStates": false,
+      "Icon": "Images/Icons/call_end"
     }
   ],
-  "Author": "TODO_ENTER_YOUR_NAME",
-  "Name": "Plugin",
-  "Description": "TODO_ENTER_PLUGIN_DESCRIPTION",
-  "Icon": "Images/pluginIcon",
-  "URL": "TODO_ENTER_YOUR_HOMEPAGE",
-  "Version": "1.0",
+  "Name": "Teams Advanced",
+  "Description": "Unofficial Microsoft Teams Stream Deck plugin with advanced functions",
+  "Author": "Tech Ben",
+  "Category": "Communication",
   "CodePath": "Plugin",
-  "Category": "Custom",
-  "CategoryIcon": "Images/categoryIcon",
+  "Icon": "Images/icon",
   "OS": [
     {
       "Platform": "windows",
       "MinimumVersion": "10"
     }
   ],
+  "ApplicationMonitoring": {
+    "windows": ["ms-teams.exe"]
+  },
+  "UUID": "tv.tech-ben.advanced-teams",
+  "Version": "1.0.0.0",
   "SDKVersion": 2,
   "Software": {
-    "MinimumVersion": "4.9"
+    "MinimumVersion": "6.6"
   }
 }
