@@ -17,7 +17,7 @@
   "Name": "Teams Advanced",
   "Description": "Unofficial Microsoft Teams Stream Deck plugin with advanced functions",
   "Author": "Tech Ben",
-  "Category": "Communication",
+  "Category": "Teams Advanced",
   "CodePath": "Teams Advanced.exe",
   "Icon": "Images/icon",
   "OS": [

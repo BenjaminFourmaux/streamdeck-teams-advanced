@@ -38,13 +38,6 @@ if %ERRORLEVEL% NEQ 0 (
 echo Validating the plugin...
 streamdeck validate "%BUILD_DIR%"
 
-if %ERRORLEVEL% NEQ 0 (
-    echo WARNING: Plugin validation failed!
-    echo Continuing with installation anyway...
-) else (
-    echo Plugin validation successful!
-)
-
 echo === Installing the plugin ===
 
 :: Create plugin folder if it doesn't exist
