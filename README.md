@@ -4,4 +4,37 @@
 Unofficial Microsoft Teams Stream Deck plugin with advanced functions 
 
 This plugin is for testing the retro-engineering of [Microsoft Teams plugin](https://marketplace.elgato.com/product/microsoft-teams-da5e2bbc-197c-4afe-8a85-a9941bf52697) by trying to implement advanced actions and see what Teams is capable of doing via its websocket.
-Moreover, building a Stream Deck plugin in C# 
+Moreover, building a Stream Deck plugin in ~~C#~~ JavaScript, awaiting to an official SDK for C# .Net (I hope)
+
+## Prerequisites
+
+Following the [Stream Deck SDK doc](https://docs.elgato.com/streamdeck/sdk/introduction/getting-started/), you need the following requis:
+-  Node.js >= 20
+- Stream Deck software >= 6.4
+- Stream Deck device
+- [Elgato CLI](https://docs.elgato.com/streamdeck/sdk/introduction/getting-started/#setup-wizard)
+- Microsoft Teams desktop
+    - Third-Part API enabled (_Settings/Privacy/Manage API/Enable API_)
+
+## Installation
+
+### Install deps
+```shell
+npm install
+```
+
+### Build the plugin
+```shell
+npm run build
+```
+
+> refer to the commande `build` findable in `package.json`
+
+That create a specific folder `com.tech-ben.teams-advanced.sdPlugin` that contains compiled plugin source
+
+### Link the plugin to the Stream Deck Software
+```shell
+streamdeck link com.tech-ben.teams-advanced.sdPlugin
+```
+
+## Actions
