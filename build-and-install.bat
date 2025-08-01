@@ -1,37 +1,65 @@
 @echo off
 echo === Build and Installation of the Stream Deck Plugin ===
 
-:: Configuration des variables
-set PLUGIN_NAME=tv.tech-ben.advanced-teams
+:: Configuration variables
+set CONFIG_TARGET=Debug
+set PLUGIN_NAME=tv.tech-ben.teams-advanced
 set PLUGIN_DIR=%APPDATA%\Elgato\StreamDeck\Plugins
 set PLUGIN_FOLDER=%PLUGIN_DIR%\%PLUGIN_NAME%.sdPlugin
-set BUILD_DIR=Plugin\bin\Debug\Plugin.sdPlugin
+set BUILD_DIR=Plugin\bin\%CONFIG_TARGET%\%PLUGIN_NAME%.sdPlugin
 
-echo Building projet...
-msbuild Plugin\Plugin.csproj /p:Configuration=Debug
+:: Build the plugin
+echo Building project...
+echo Configuration target: %CONFIG_TARGET%
+msbuild Plugin /p:Configuration=%CONFIG_TARGET% /verbosity:quiet /nologo
 
-if errorlevel 1 (
-    echo Error during the compilation !
+if %ERRORLEVEL% NEQ 0 (
+    echo Error during compilation!
     pause
     exit /b 1
 )
+echo Build completed successfully.
 
-echo.
-echo === Install the plugin ===
+:: Check Elgato CLI installed
+echo Checking if Elgato Stream Deck CLI is installed...
+where streamdeck >nul 2>&1
 
-:: Créer le dossier du plugin s'il n'existe pas
+if %ERRORLEVEL% NEQ 0 (
+    echo ERROR: Elgato Stream Deck CLI not found!
+    echo Please install the Stream Deck CLI from: https://docs.elgato.com/streamdeck/cli/intro/#installing-from-npm
+    echo The CLI is required for plugin validation.
+    pause
+    exit /b 1
+) else (
+    echo Elgato Stream Deck CLI installed.
+)
+
+:: Validate the plugin
+echo Validating the plugin...
+streamdeck validate "%BUILD_DIR%"
+
+if %ERRORLEVEL% NEQ 0 (
+    echo WARNING: Plugin validation failed!
+    echo Continuing with installation anyway...
+) else (
+    echo Plugin validation successful!
+)
+
+echo === Installing the plugin ===
+
+:: Create plugin folder if it doesn't exist
 if not exist "%PLUGIN_FOLDER%" (
-    mkdir "%PLUGIN_FOLDER%"
+    mkdir "%PLUGIN_FOLDER%" >nul 2>&1
     echo Created plugin folder: %PLUGIN_FOLDER%
 )
 
-:: Utiliser robocopy pour copier tout le contenu du dossier de build vers le dossier du plugin
-echo Copying all files and subdirectories using robocopy...
-robocopy "%BUILD_DIR%" "%PLUGIN_FOLDER%" /S /E
+:: Use robocopy to copy all build content to plugin folder (suppress detailed output)
+echo Copying plugin files...
+robocopy "%BUILD_DIR%" "%PLUGIN_FOLDER%" /S /E /NP /NDL /NFL /NC /NS /NJH /NJS >nul
 
-:: Vérifier le code de retour de robocopy (0-7 sont des succès)
+:: Check robocopy return code (0-7 are success codes)
 if %ERRORLEVEL% LSS 8 (
-    echo Robocopy completed successfully
+    echo Plugin files copied successfully.
 ) else (
     echo Robocopy failed with error code: %ERRORLEVEL%
     pause
