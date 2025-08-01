@@ -4,18 +4,17 @@
 	"Author": "Tech Ben",
 	"Actions": [
 		{
-			"Name": "Counter",
-			"UUID": "com.tech-ben.teams-advanced.increment",
-			"Icon": "imgs/actions/counter/icon",
-			"Tooltip": "Displays a count, which increments by one on press.",
-			"PropertyInspectorPath": "ui/increment-counter.html",
+			"Name": "End Call",
+			"UUID": "com.tech-ben.teams-advanced.end-call",
+			"Icon": "imgs/actions/end-call/icon",
+			"Tooltip": "End Call",
+			"PropertyInspectorPath": "ui/end-call.html",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
-					"TitleAlignment": "middle"
+					"Image": "imgs/actions/end-call/key"
 				}
 			]
 		}
