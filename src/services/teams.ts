@@ -21,7 +21,7 @@ export class Teams {
         device: string,
         app: string,
         appVersion: string,
-        protocol: string = "2.0"
+        protocol: string = "2.0.0"
     ) {
         this.websocketUri = `${Teams.baseUrl}?token=${token}&protocol-version=${protocol}&manufacturer=${encodeURIComponent(manufacturer)}&device=${encodeURIComponent(device)}&app=${encodeURIComponent(app)}&app-version=${encodeURIComponent(appVersion)}`;
     }
@@ -34,8 +34,6 @@ export class Teams {
             try {
                 streamDeck.logger.info(`Connecting to WebSocket at ${this.websocketUri}`);
                 this.webSocket = new WebSocket(this.websocketUri);
-
-                streamDeck.logger.info(this.webSocket.readyState);
                 
                 // Events listeners
                 this.webSocket.onopen = () => this.onOpen(resolve);

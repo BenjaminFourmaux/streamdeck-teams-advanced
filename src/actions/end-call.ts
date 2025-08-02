@@ -1,4 +1,4 @@
-import { action, KeyDownEvent, SingletonAction, WillAppearEvent, WillDisappearEvent } from "@elgato/streamdeck";
+import { streamDeck, action, KeyDownEvent, SingletonAction, WillAppearEvent, WillDisappearEvent } from "@elgato/streamdeck";
 import { teamsService } from "../services/teams-service";
 import { MeetingPermissions, MeetingState } from "../interfaces/teams-types";
 
@@ -37,12 +37,21 @@ export class EndCall extends SingletonAction {
     }
 
     override async onKeyDown(ev: KeyDownEvent): Promise<void> {
+        streamDeck.logger.info("on 'end-call' KeyDown event");
         try {
+            
             const teamsAPI = teamsService.getTeamsAPI();
             
             // Check if Teams API is available and connected
-            if (!teamsAPI || teamsAPI.isConnected()) {
+            if (!teamsAPI || !teamsAPI.isConnected()) {
+                streamDeck.logger.warn("Teams API is not available or connected");
                 ev.action.showAlert();
+                return;
+            }
+
+            // If not in a meeting, do nothing
+            if (!teamsService.getMeetingState()?.isInMeeting) {
+                streamDeck.logger.info("Not in a meeting, action skipped");
                 return;
             }
 
