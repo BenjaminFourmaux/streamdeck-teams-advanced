@@ -29,13 +29,11 @@ export class EndCall extends SingletonAction {
         }
     }
 
+    /**
+     * Update button appearance based on current state
+     */
     private updateButtonAppearance(ev: WillAppearEvent): void {
-        if (!teamsService.isConnected()) {
-            ev.action.setTitle("Teams\nOffline");
-            return;
-        }
-
-        ev.action.setTitle("End Call");
+        
     }
 
     override async onKeyDown(ev: KeyDownEvent): Promise<void> {
@@ -43,41 +41,21 @@ export class EndCall extends SingletonAction {
             const teamsAPI = teamsService.getTeamsAPI();
             
             // Check if Teams API is available and connected
-            if (!teamsAPI) {
+            if (!teamsAPI || teamsAPI.isConnected()) {
                 ev.action.showAlert();
-                ev.action.setTitle("Teams\nNot Init");
-                this.resetTitleAfterDelay(ev);
                 return;
             }
 
-            if (!teamsAPI.isConnected()) {
-                ev.action.showAlert();
-                ev.action.setTitle("Teams\nOffline");
-                this.resetTitleAfterDelay(ev);
-                return;
-            }
 
-            // Send the end call action to Teams
-            await teamsAPI.endCall();
+            // Send the leave call action to Teams
+            await teamsAPI.leaveCallEvent();
             
             // Show success feedback
             ev.action.showOk();
-            ev.action.setTitle("Call\nEnded");
             
-            this.resetTitleAfterDelay(ev);
-
         } catch (error) {
             console.error("Failed to end Teams call:", error);
             ev.action.showAlert();
-            ev.action.setTitle("Error");
-            
-            this.resetTitleAfterDelay(ev);
         }
-    }
-
-    private resetTitleAfterDelay(ev: KeyDownEvent): void {
-        setTimeout(() => {
-            this.updateButtonAppearance(ev as any);
-        }, 2000);
     }
 }

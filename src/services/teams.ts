@@ -1,3 +1,4 @@
+import streamDeck from "@elgato/streamdeck";
 import WebSocket from 'ws';
 import { MeetingPermissions, MeetingState, MeetingUpdate, TeamsMessage } from '../interfaces/teams-types';
 
@@ -31,7 +32,10 @@ export class Teams {
     public async connect(): Promise<void> {
         return new Promise((resolve, reject) => {
             try {
+                streamDeck.logger.info(`Connecting to WebSocket at ${this.websocketUri}`);
                 this.webSocket = new WebSocket(this.websocketUri);
+
+                streamDeck.logger.info(this.webSocket.readyState);
                 
                 // Events listeners
                 this.webSocket.onopen = () => this.onOpen(resolve);
@@ -50,9 +54,9 @@ export class Teams {
      * Handle WebSocket open event
      */
     private onOpen(resolve: () => void): void {
-        console.log("Connected successfully!");
-        console.log(`Connected to WebSocket at ${this.websocketUri}`);
-        console.log(`WebSocket State: ${this.webSocket?.readyState}`);
+        streamDeck.logger.info("Connected successfully!");
+        streamDeck.logger.info(`Connected to WebSocket at ${this.websocketUri}`);
+        streamDeck.logger.info(`WebSocket State: ${this.webSocket?.readyState}`);
         resolve();
     }
 
@@ -60,7 +64,7 @@ export class Teams {
      * Handle WebSocket error event
      */
     private onError(error: WebSocket.ErrorEvent, reject: (reason?: any) => void): void {
-        console.error("WebSocket error:", error);
+        streamDeck.logger.error("WebSocket error:", error.message);
         reject(new Error("WebSocket connection failed"));
     }
 
@@ -202,37 +206,10 @@ export class Teams {
     // Convenience methods for common Teams actions
     
     /**
-     * End the current call
+     * Leave the current call
      */
-    public async endCall(): Promise<void> {
-        return this.sendAction("end-call", {});
-    }
-
-    /**
-     * Toggle mute status
-     */
-    public async toggleMute(): Promise<void> {
-        return this.sendAction("toggle-mute", {});
-    }
-
-    /**
-     * Toggle camera status
-     */
-    public async toggleCamera(): Promise<void> {
-        return this.sendAction("toggle-video", {});
-    }
-
-    /**
-     * Toggle hand raise
-     */
-    public async toggleHand(): Promise<void> {
-        return this.sendAction("toggle-hand", {});
-    }
-
-    /**
-     * Leave the current meeting
-     */
-    public async leaveMeeting(): Promise<void> {
+    public async leaveCallEvent(): Promise<void> {
         return this.sendAction("leave-call", {});
     }
+
 }
