@@ -1,4 +1,8 @@
+.vs
 .vscode
+
+Test/bin
+Test/obj
 
 # Node.js
 node_modules/
