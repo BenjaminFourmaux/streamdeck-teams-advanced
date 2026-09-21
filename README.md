@@ -5,6 +5,10 @@
   <img src="./com.tech-ben.teams-advanced.sdPlugin/imgs/plugin/marketplace.png" alt=""/>
 </p>
 
+> [!IMPORTANT]
+> **Teams third-party API retirement** [MC1266901](https://mc.merill.net/message/MC1266901).
+> Microsoft annonce the retirement of third-part API in Teams, and and remove the possibility of this StreamDeck plugin to communicate with Teams app.
+
 Unofficial Microsoft Teams Stream Deck plugin with advanced functions 
 
 This plugin is for testing the retro-engineering of [Microsoft Teams plugin](https://marketplace.elgato.com/product/microsoft-teams-da5e2bbc-197c-4afe-8a85-a9941bf52697) by trying to implement advanced actions and see what Teams is capable of doing via its websocket.
